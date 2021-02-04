@@ -3,6 +3,14 @@ include_directories(../dependencies)
 
 add_definitions(-DVK_CURL_DEBUG)
 
+if (${CMAKE_SYSTEM_PROCESSOR} STREQUAL "x86_64")
+    set(CMAKE_CXX_FLAGS "-Wall -Wextra -O3 -msse3 -mtune=generic -march=native")
+elseif(${CMAKE_SYSTEM_PROCESSOR} STREQUAL "i686")
+    set(CMAKE_CXX_FLAGS "-Wall -Wextra -msse3 -march=i686 -mtune=generic")
+else()
+    set(CMAKE_CXX_FLAGS "-Wall -Wextra -O3")
+endif()
+
 add_library(
     cpp_vk_lib
     SHARED

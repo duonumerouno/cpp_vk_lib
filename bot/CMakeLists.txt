@@ -6,7 +6,7 @@ set(SOURCES
     main.cpp
 )
 add_executable(
-    worker ${SOURCES} ${HEADERS}
+    worker ${SOURCES}
 )
 
 target_link_libraries(worker -Lshared cpp_vk_lib pthread curl curlpp -L../dependencies/simdjson simdjson)

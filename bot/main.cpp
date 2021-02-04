@@ -42,7 +42,7 @@ public:
     void execute(long peer_id, std::string_view text) override
     {
         vk::photos photos;
-        vk::attachment::attachments_t media = photos.search(text, 10);
+        vk::attachment::attachments_t media = photos.search(text, 100);
 
         (media.empty())
             ? messages.send(peer_id, "no docs")

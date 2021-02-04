@@ -45,21 +45,22 @@ static simdjson::dom::object get_updates(const vk::long_poll_data& data, std::si
 {
     static vk::lib::network_client network_client;
     static simdjson::dom::parser parser;
-    std::string raw_json =
-    network_client.request(data.server + '?', {
-        {"act",     "a_check"},
-        {"key",     data.key},
-        {"ts",      data.ts},
-        {"wait",    std::to_string(timeout)}
-    });
-    return parser.parse(raw_json);
+
+    return
+    parser.parse(
+        network_client.request(data.server + '?', {
+            {"act",     "a_check"},
+            {"key",     data.key},
+            {"ts",      data.ts},
+            {"wait",    std::to_string(timeout)}
+        })
+    );
 }
 
 vk::long_poll_api::events_t vk::long_poll_api::listen(const long_poll_data& data, std::size_t timeout) const
 {
     simdjson::dom::object raw_updates = get_updates(data, timeout);
     std::vector<std::unique_ptr<vk::event::common>> updates_list;
-    updates_list.reserve(raw_updates["updates"].get_array().size());
 
     for (simdjson::dom::element&& update : raw_updates["updates"].get_array())
     {
