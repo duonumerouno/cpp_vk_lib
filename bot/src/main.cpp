@@ -29,13 +29,7 @@ public:
 private:
     void setup_commands()
     {
-        poller.get_message_handler().on_command("/download", std::make_unique<command::voice_message_dowload>());
-        poller.get_message_handler().on_command("/upload", std::make_unique<command::voice_message_upload>());
-        poller.get_message_handler().on_command("/chatphoto", std::make_unique<command::set_chat_photo>());
-        poller.get_message_handler().on_command("/doc", std::make_unique<command::docs_search>());
-        poller.get_message_handler().on_command("/show", std::make_unique<command::keyboard>());
-        poller.get_message_handler().on_command("/hide", std::make_unique<command::hide_keyboard>());
-        // Other commands...
+        // DAZDADZDADZDADZDDADZDADDZDADDZ закрой тот пр
     }
     void setup_event_reactions()
     {
